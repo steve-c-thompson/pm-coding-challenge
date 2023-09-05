@@ -84,7 +84,7 @@ export default function InvestorForm() {
     });
 
     const data = await response.json();
-    // console.log("data is ", data)
+    console.log("response is ", data)
 
     if(data.investor){
         setFirstName("")
