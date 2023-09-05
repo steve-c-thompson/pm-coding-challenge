@@ -58,5 +58,5 @@ export default async function handler(
   });
 
   
-  res.status(200).json({ id: id, msg: `File created at ${fp}` });
+  res.status(200).json({ investor: id, msg: `File created at ${fp}` });
 }
