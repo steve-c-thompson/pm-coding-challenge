@@ -2,7 +2,7 @@
 import { FormEvent } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useState } from "react";
-// import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function InvestorForm() {
   const [firstName, setFirstName] = useState("");
@@ -19,45 +19,61 @@ export default function InvestorForm() {
       label: "First name",
       name: "firstName",
       type: "text",
+      change: (e:any) => setFirstName(e.target.value),
+      st: firstName,
     },
     {
       label: "Last name",
       name: "lastName",
       type: "text",
+      change: (e:any) => setLastName(e.target.value),
+      st: lastName,
     },
     {
       label: "Date of birth",
       name: "dateOfBirth",
       type: "date",
+      change: (e:any) => setDateOfBirth(e.target.value),
+      st: dateOfBirth,
     },
     {
       label: "Phone number",
       name: "phoneNumber",
       type: "text",
+      change: (e:any) => setPhoneNumber(e.target.value),
+      st: phoneNumber,
     },
     {
       label: "Street address",
       name: "streetAddress",
       type: "text",
+      change: (e:any) => setStreetAddress(e.target.value),
+      st: streetAddress,
     },
     {
       label: "State",
       name: "state",
       type: "text",
+      change: (e:any) => setState(e.target.value),
+      st: state,
     },
     {
       label: "Zip Code",
       name: "zipCode",
       type: "text",
+      change: (e:any) => setZipCode(e.target.value),
+      st: zipCode,
     },
     {
       label: "File",
       name: "file",
       type: "file",
+      change: (e:any) => setFile(e.target.value),
+      st: file,
     },
   ];
 
-  const showToastMessage = async (res: any) => {
+  const showToastMessage = (res: any) => {
     if (res.investor) {
       toast.success(
         `${res.investor.firstName} ${res.investor.lastName} created`,
@@ -101,8 +117,10 @@ export default function InvestorForm() {
 
 
   return (
+    <>
+    <ToastContainer />
     <form onSubmit={onSubmit}>
-      {investorFormFields.map(({ label, name, type }) => (
+      {investorFormFields.map(({ label, name, type, st, change }) => (
         <div className="mb-6" key={name}>
           <label
             htmlFor={name}
@@ -114,6 +132,8 @@ export default function InvestorForm() {
             required
             type={type}
             name={name}
+            onChange={change}
+            value={st}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           />
         </div>
@@ -125,5 +145,6 @@ export default function InvestorForm() {
         Submit
       </button>
     </form>
+    </>
   );
 }
